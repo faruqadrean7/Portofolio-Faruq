@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm add *)",
+      "Bash(pnpm typecheck *)",
+      "Bash(timeout 30 pnpm dev)",
+      "Bash(timeout 25 pnpm dev)",
+      "Bash(timeout 20 pnpm dev)",
+      "Bash(npx tsc *)"
+    ]
+  }
+}

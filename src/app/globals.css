@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #FAFAF7;
+  --surface: #FFFFFF;
+  --ink: #0F1115;
+  --muted: #5C606B;
+  --accent: #1E3A8A;
+  --accent-soft: #EEF2FB;
+  --line: #E5E5E0;
+
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-serif: "Fraunces", Georgia, serif;
+}
+
+.dark {
+  --bg: #0B0F17;
+  --surface: #111722;
+  --ink: #E7EAF0;
+  --muted: #8B92A0;
+  --accent: #60A5FA;
+  --accent-soft: #1E2A44;
+  --line: #1F2733;
+}
+
+html { color-scheme: light; }
+html.dark { color-scheme: dark; }
+
+/* ---------- Hero space background ---------- */
+.hero-stars {
+  background-repeat: repeat;
+  will-change: transform;
+}
+.hero-stars-1 {
+  background-image:
+    radial-gradient(1px 1px at 12% 18%, #ffffff 50%, transparent 51%),
+    radial-gradient(1px 1px at 38% 62%, #cfe6ff 50%, transparent 51%),
+    radial-gradient(1px 1px at 65% 24%, #ffffff 50%, transparent 51%),
+    radial-gradient(1px 1px at 82% 78%, #ffffff 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 22% 88%, #ffffff 50%, transparent 51%),
+    radial-gradient(1px 1px at 92% 12%, #cfe6ff 50%, transparent 51%);
+  background-size: 800px 600px;
+  opacity: 0.85;
+  animation: hero-drift 90s linear infinite;
+}
+.hero-stars-2 {
+  background-image:
+    radial-gradient(2px 2px at 18% 42%, #ffffff 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 70% 70%, #aee0ff 50%, transparent 51%),
+    radial-gradient(2px 2px at 48% 12%, #ffffff 50%, transparent 51%),
+    radial-gradient(2.5px 2.5px at 88% 48%, #ffffff 50%, transparent 51%);
+  background-size: 1100px 800px;
+  opacity: 0.7;
+  animation: hero-drift 140s linear infinite;
+  filter: drop-shadow(0 0 4px rgba(255,255,255,0.4));
+}
+@keyframes hero-drift {
+  from { background-position: 0 0; }
+  to   { background-position: -800px -600px; }
+}
+
+/* Floating object — three preset drift styles */
+.hero-float {
+  animation-name: hero-float-0;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+.hero-float-0 { animation-name: hero-float-0; }
+.hero-float-1 { animation-name: hero-float-1; }
+.hero-float-2 { animation-name: hero-float-2; }
+
+@keyframes hero-float-0 {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-4deg); }
+  50%      { transform: translate3d(14px, -22px, 0) rotate(4deg); }
+}
+@keyframes hero-float-1 {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(3deg); }
+  50%      { transform: translate3d(-18px, -16px, 0) rotate(-5deg); }
+}
+@keyframes hero-float-2 {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  50%      { transform: translate3d(10px, 18px, 0) rotate(6deg); }
+}
+
+.hero-float-img {
+  filter: drop-shadow(0 8px 22px rgba(99,179,237,0.35))
+          drop-shadow(0 2px 6px rgba(0,0,0,0.4));
+  user-select: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-stars-1, .hero-stars-2, .hero-float { animation: none !important; }
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: var(--accent); color: var(--bg); }
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+
+  h1, h2, h3, h4 { font-family: var(--font-serif); font-weight: 500; letter-spacing: -0.02em; }
+}
+
+@layer components {
+  .container-page { @apply mx-auto max-w-page px-6 md:px-10; }
+  .section { @apply py-24 md:py-32; }
+  .eyebrow {
+    @apply text-xs uppercase tracking-[0.18em] text-muted font-medium;
+  }
+  .btn-primary {
+    @apply inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-medium text-white transition hover:opacity-90;
+  }
+  .btn-outline {
+    @apply inline-flex items-center gap-2 rounded-full border border-line px-6 py-3 text-sm font-medium text-ink transition hover:border-ink;
+  }
+  .card {
+    @apply rounded-2xl border border-line bg-surface p-6 transition hover:-translate-y-0.5 hover:border-muted hover:shadow-[0_8px_30px_rgb(0_0_0_/_0.04)];
+  }
+  .input-field {
+    @apply w-full rounded-lg border border-line bg-surface px-4 py-3 text-sm text-ink outline-none transition focus:border-accent focus:ring-2 focus:ring-accent-soft;
+  }
+}

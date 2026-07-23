@@ -133,3 +133,4 @@ supabase/
 
 © 2026 Faruq Adrean. Personal use only.
 # Portofolio-Faruq
+# Portofolio-Faruq
